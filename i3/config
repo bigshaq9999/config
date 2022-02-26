@@ -469,7 +469,7 @@ strip_workspace_numbers yes
 		focused_workspace	$magenta		$magenta	$black		$purple
 		active_workspace	$black			$black		$grey		$purple
 		inactive_workspace	$black			$black		$grey		$purple
-		urgent_workspace	$urgentred		$black		$urgentred	$purple
+		urgent_workspace	$magenta		$black		$magenta	$purple
 	}
 }
 
