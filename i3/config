@@ -2,7 +2,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Regular 11
+font pango:Noto Sans Regular 10
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -33,7 +33,7 @@ new_window pixel 3
 # hide_edge_borders both
 
 # Set inner/outer gaps
-gaps inner 7
+gaps inner 0
 #gaps outer 3
 
 
@@ -107,7 +107,7 @@ bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 # lock with a picture:
 #bindsym $mod+l exec i3lock -i  ~/.config/i3/i3-lock-screen.png -p default|win -t
 # lock by blurring the screen:
-bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
+bindsym $mod+u exec ~/.config/i3/scripts/blur-lock
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -126,9 +126,10 @@ bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 # change focus
-bindsym $mod+i focus down
-bindsym $mod+j focus left 
-bindsym $mod+k focus right 
+bindsym $mod+k focus up 
+bindsym $mod+j focus down
+bindsym $mod+h focus left 
+bindsym $mod+l focus right 
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -136,6 +137,11 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+
+bindsym $mod+Shift+h	move left
+bindsym $mod+Shift+j	move down 
+bindsym $mod+Shift+k	move up 
+bindsym $mod+Shift+l	move right 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -143,18 +149,18 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+i split horizontal
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+o split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+g layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+z layout tabbed
+bindsym $mod+x layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -189,13 +195,13 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Redirect sound to headphones
-bindsym $mod+p exec /usr/local/bin/switch-audio-port
+#bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 ## App shortcuts
-bindsym $mod+w exec /usr/bin/qutebrowser
+bindsym $mod+w exec /usr/bin/firefox
 bindsym $mod+n exec /usr/bin/pcmanfm
 bindsym Print exec "scrot Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png"
-bindsym $mod+c exec /usr/bin/discord
+# bindsym $mod+c exec /home/lam/.local/bin/discord-appimage
 
 ##########################################
 # configuration for workspace behaviour: #
@@ -216,15 +222,15 @@ set $ws10 "10"
 
 # bind program to workspace and focus to them on startup:
 assign [class="Alacritty"] $ws1
-assign [class="(?i)qutebrowser"] $ws2
-assign [class="(?i)pcmanfm"] $ws3
+assign [class="(?i)firefox"] $ws2
+#assign [class="(?i)pcmanfm"] $ws3
 assign [class="Thunderbird"] $ws6
 assign [class="(?i)discord"] $ws10
 for_window [class="^Spotify"] move to workspace $ws9
 
 # automatic set focus new window if it opens on another workspace then the current:
 for_window [class=Alacritty] focus
-for_window [class=(?i)qutebrowser] focus
+for_window [class=(?i)firefox] focus
 for_window [class=(?i)pcmanfm] focus
 for_window [class=Thunderbird] focus
 for_window [class=Discord] focus
@@ -302,10 +308,10 @@ set $lightpink 		#e86195
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused			$yellow		$black		$white		$lightpink	$magenta
-client.unfocused		$cyan		$black		$blue		$darkgrey	$darkgrey
-client.focused_inactive		$cyan		$black		$blue		$darkgrey	$darkgrey
-client.urgent			$red		$red		$white		$darkgrey	$darkgrey
+client.focused			$magenta	$black		$white		$lightpink	$magenta
+client.unfocused		$black		$black		$black		$black		$black
+client.focused_inactive		$black		$black		$white		$black		$black
+client.urgent			$urgentred	$black		$white		$black		$black
 
 
 ############################################
@@ -348,7 +354,7 @@ strip_workspace_numbers yes
 
 # bindsym $mod+d exec dmenu
 
-bindsym $mod+d exec rofi -modi drun -show drun \
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
 		-config ~/.config/rofi/rofidmenu.rasi
 
 bindsym $mod+t exec rofi -show window \
