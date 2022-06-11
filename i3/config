@@ -52,6 +52,8 @@ bindsym $mod+7    workspace  $ws7
 bindsym $mod+8    workspace  $ws8
 bindsym $mod+9    workspace  $ws9
 bindsym $mod+0    workspace  $ws10
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # move focused container to workspace
 bindsym $mod+Shift+1    move container to workspace  $ws1
@@ -222,7 +224,7 @@ set $ws10 "10"
 
 # bind program to workspace and focus to them on startup:
 assign [class="Alacritty"] $ws1
-assign [class="(?i)firefox"] $ws2
+#assign [class="(?i)firefox"] $ws2
 #assign [class="(?i)pcmanfm"] $ws3
 assign [class="Thunderbird"] $ws6
 assign [class="(?i)discord"] $ws10
@@ -232,9 +234,8 @@ for_window [class="^Spotify"] move to workspace $ws9
 for_window [class=Alacritty] focus
 for_window [class=(?i)firefox] focus
 for_window [class=(?i)pcmanfm] focus
-for_window [class=Thunderbird] focus
-for_window [class=Discord] focus
-for_window [class=Spotify] focus
+#for_window [class=Thunderbird] focus
+#for_window [class=Spotify] focus
 
 #############################################
 # autostart applications/services on login: #
@@ -256,7 +257,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # start blueberry app for managing bluetooth devices from tray:
-exec --no-startup-id blueberry-tray
+exec --no-startup-id blueman-applet
 
 # networkmanager-applet
 exec --no-startup-id nm-applet
@@ -270,22 +271,21 @@ exec --no-startup-id xset s 480 dpms 600 600 600
 # Desktop notifications
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 
+# Autostart thunderbird on boot 
+exec --no-startup-id thunderbird 
+
 # set floating (nontiling)for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 
 # For floating zoom windows 
 for_window [class="zoom"] floating enable
 
 # set floating (nontiling) for special apps
-for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-for_window [class="qt5ct" instance="qt5ct"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Blueman-manager" instance="blueman-manager"] floating enable
+#for_window [class="Pcmanfm" instance="pcmanfm" ] floating enable 
+for_window [class="Nm-connection-editor" instance="nm-connection-editor"] floating enable
 
 ######################################
 # color settings for bar and windows #
